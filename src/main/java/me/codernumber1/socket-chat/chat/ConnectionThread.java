@@ -31,7 +31,7 @@ public class ConnectionThread extends Thread {
     {
         String inputLine;
         while ((inputLine = in.readLine()) != null) {
-            logger.log(inputLine);
+            logger.log("Data received: " + inputLine);
             ICommand command = Protocol.parseData(inputLine);
             if (command instanceof ICommand) {
                 server.commandExecute(clientName, command);    

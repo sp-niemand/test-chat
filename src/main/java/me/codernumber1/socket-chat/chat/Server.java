@@ -14,7 +14,7 @@ public class Server {
     private Map<String, ConnectionThread> connectionMap
         = Collections.synchronizedMap(new HashMap<String, ConnectionThread>());
     private History history;
-    private Logger logger;
+    private Logger logger = new Logger();
     private ServerSocket serverSocket;
 
     public Server() {
@@ -38,7 +38,10 @@ public class Server {
     void commandExecute(String clientName, ICommand command)
     {
         command.execute(clientName, connectionMap, history);
-        String logMsg = "clientName=" + clientName + "; connectionMap=" + connectionMap;
+        String logMsg = "Server.commandExecute() environment:\n"
+            + "    clientName   = " + clientName + ";\n" 
+            + "    connectionMap= " + connectionMap + ";\n"
+            + "    command      = " + command;
         logger.log(logMsg);
     }
 
@@ -52,6 +55,8 @@ public class Server {
             logger.log(e);
             return;
         }
+
+        logger.log("Server started");
         
         while (true) {
             try {

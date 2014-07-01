@@ -33,4 +33,9 @@ class TellAllCommand implements ICommand {
     {
         return NAME;
     }
+
+    public String toString()
+    {
+        return "TellAllCommand \"" + message + "\"";
+    }
 }

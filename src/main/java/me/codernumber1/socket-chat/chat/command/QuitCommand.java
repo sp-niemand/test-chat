@@ -21,4 +21,9 @@ public class QuitCommand implements ICommand {
     {
         connectionMap.remove(clientName);
     }
+
+    public String toString()
+    {
+        return "QuitCommand";
+    }
 }

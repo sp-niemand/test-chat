@@ -2,9 +2,8 @@ package chat;
 
 import java.net.*;
 import java.io.*;
-import chat.command.Protocol;
-import chat.exception.SocketException;
-import chat.Logger;
+import chat.command.*;
+import chat.exception.*;
 
 public class ConnectionThread extends Thread {
     private Socket socket;
@@ -12,8 +11,10 @@ public class ConnectionThread extends Thread {
     private Logger logger;
     private BufferedReader in;
     private PrintWriter out;
+    private String clientName;
 
-    public ConnectionThread(Socket socket, Server server, Logger logger) {
+    public ConnectionThread(String clientName, Socket socket, Server server, Logger logger) {
+        this.clientName = clientName;
         this.socket = socket;
         this.server = server;
         this.logger = logger;
@@ -21,7 +22,6 @@ public class ConnectionThread extends Thread {
         try {
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.out = new PrintWriter(socket.getOutputStream(), true);            
-            out.println("Welcome!");
         } catch (IOException e) {
             logger.log("ConnectionThread.constructor(): " + e);
         }
@@ -31,13 +31,28 @@ public class ConnectionThread extends Thread {
     {
         try {
             logger.log("Connection thread created");
+            out.println("Welcome!");
+
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 logger.log(inputLine);
-                server.commandExecute(Protocol.parseData(inputLine));
+                ICommand command = Protocol.parseData(inputLine);
+                if (command instanceof ICommand) {
+                    server.commandExecute(clientName, command);    
+                }
+                if (command instanceof QuitCommand) {
+                    break;
+                }
             }
         } catch (IOException e) {
             logger.log("ConnectionThread.run(): " + e);
+        } finally {
+            try {
+                out.close();
+                in.close();
+                socket.close();
+            } catch (Exception e) {
+            }
         }
     }
 

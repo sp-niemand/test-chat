@@ -15,6 +15,7 @@ public class Server {
         = Collections.synchronizedMap(new HashMap<String, ConnectionThread>());
     private History history;
     private Logger logger;
+    private ServerSocket serverSocket;
 
     public Server() {
         this.port = Server.DEFAULT_PORT;
@@ -34,20 +35,30 @@ public class Server {
         return "guest" + this.guestId ++;
     }
 
-    public void commandExecute(ICommand command)
+    void commandExecute(String clientName, ICommand command)
     {
-        command.execute(connectionMap, history);
+        command.execute(clientName, connectionMap, history);
     }
 
-    public void run()
+    public void run() throws IOException
     {
+        try {
+            serverSocket = new ServerSocket(this.port);
+        } catch (IOException e) {
+            logger.log("Exception caught when trying to listen on port "
+                + this.port + " or listening for a connection");
+            logger.log(e);
+            return;
+        }
+        
         while (true) {
-            try ( 
-                ServerSocket serverSocket = new ServerSocket(this.port);
-                Socket clientSocket = serverSocket.accept();    
-            )   {
-                ConnectionThread newConnection = new ConnectionThread(clientSocket, this, logger);
-                connectionMap.put(this.getNewGuestName(), newConnection);
+            try {
+                Socket clientSocket = serverSocket.accept();  
+                String clientName = this.getNewGuestName();
+                ConnectionThread newConnection = new ConnectionThread(
+                    clientName, clientSocket, this, logger
+                );
+                connectionMap.put(clientName, newConnection);
                 newConnection.start();
             } catch (IOException e) {
                 logger.log("Exception caught when trying to listen on port "

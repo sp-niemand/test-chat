@@ -4,16 +4,9 @@ import chat.ConnectionThread;
 import chat.History;
 import java.util.*;
 
-public class LoginCommand implements ICommand {
-    public static final int ARGS_NUM = 1;
-    public static final String NAME = "/login";
-
-    private String name;
-
-    public LoginCommand(String name)
-    {
-        this.name = name;
-    }
+public class QuitCommand implements ICommand {
+    public static final int ARGS_NUM = 0;
+    public static final String NAME = "/quit";
 
     public String getName() 
     {
@@ -31,8 +24,6 @@ public class LoginCommand implements ICommand {
         History history
     )
     {
-        System.out.println("LoginCommand.execute()");
-        System.out.println(connectionMap);
-        System.out.println(history);
+        connectionMap.remove(clientName);
     }
 }

@@ -14,8 +14,11 @@ public class Protocol {
                     : new LoginCommand(parts[1]);
             case QuitCommand.NAME: 
                 return new QuitCommand();
+            case TellAllCommand.NAME:
+                String message = data.substring(TellAllCommand.NAME.length());
+                return message.length() == 0 ? null : new TellAllCommand(message);
             default:
-                return null;
+                return new TellAllCommand(data);
         }
     }
 }

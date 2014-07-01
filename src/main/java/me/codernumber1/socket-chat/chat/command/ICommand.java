@@ -12,6 +12,4 @@ public interface ICommand {
     );
 
     public String getName();
-
-    public int getArgsNumber();
 }

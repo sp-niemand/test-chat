@@ -68,8 +68,11 @@ public class ConnectionThread extends Thread {
     public void setClientName(String clientName)
     {
         this.clientName = clientName;
-        logger.log("ConnectionThread.setClientName(" + clientName + "); " 
-            + "this.clientName=" + this.clientName);
+    }
+
+    public String getClientName()
+    {
+        return clientName;
     }
 
     public String toString()

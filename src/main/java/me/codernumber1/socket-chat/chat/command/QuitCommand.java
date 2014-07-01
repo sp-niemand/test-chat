@@ -13,11 +13,6 @@ public class QuitCommand implements ICommand {
         return NAME;
     }
 
-    public int getArgsNumber()
-    {
-        return ARGS_NUM;
-    }
-
     public void execute(
         String clientName,
         Map<String, ConnectionThread> connectionMap,

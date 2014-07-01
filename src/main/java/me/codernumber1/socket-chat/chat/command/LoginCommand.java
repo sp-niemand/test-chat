@@ -20,11 +20,6 @@ public class LoginCommand implements ICommand {
         return NAME;
     }
 
-    public int getArgsNumber()
-    {
-        return ARGS_NUM;
-    }
-
     public void execute(
         String clientName,
         Map<String, ConnectionThread> connectionMap,
@@ -35,6 +30,12 @@ public class LoginCommand implements ICommand {
         if (clientConnectionThread == null) {
             return;
         }
+
+        if (connectionMap.containsKey(this.name)) {
+            clientConnectionThread.print("Name already in use!");
+            return;
+        }
+
         connectionMap.remove(clientName);
         clientConnectionThread.setClientName(this.name);
         connectionMap.put(this.name, clientConnectionThread);

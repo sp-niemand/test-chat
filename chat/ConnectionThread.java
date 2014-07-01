@@ -27,24 +27,28 @@ public class ConnectionThread extends Thread {
         }
     }
 
+    private void commandLoop() throws IOException
+    {
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            logger.log(inputLine);
+            ICommand command = Protocol.parseData(inputLine);
+            if (command instanceof ICommand) {
+                server.commandExecute(clientName, command);    
+            }
+            if (command instanceof QuitCommand) {
+                break;
+            }
+        }
+    }
+
     public void run()
     {
         try {
             logger.log("Connection thread created");
-            out.println("Welcome!");
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                logger.log(inputLine);
-                ICommand command = Protocol.parseData(inputLine);
-                if (command instanceof ICommand) {
-                    server.commandExecute(clientName, command);    
-                }
-                if (command instanceof QuitCommand) {
-                    break;
-                }
-            }
-        } catch (IOException e) {
+            print("Welcome, <" + clientName + ">!");
+            commandLoop();
+        } catch (Exception e) {
             logger.log("ConnectionThread.run(): " + e);
         } finally {
             try {
@@ -59,5 +63,18 @@ public class ConnectionThread extends Thread {
     public void print(String msg)
     {
         out.println(msg);
+    }
+
+    public void setClientName(String clientName)
+    {
+        this.clientName = clientName;
+        logger.log("ConnectionThread.setClientName(" + clientName + "); " 
+            + "this.clientName=" + this.clientName);
+    }
+
+    public String toString()
+    {
+        String parentResult = super.toString();
+        return "[" + parentResult + "; clientName=" + clientName + "]";
     }
 }

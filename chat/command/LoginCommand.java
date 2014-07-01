@@ -31,8 +31,12 @@ public class LoginCommand implements ICommand {
         History history
     )
     {
-        System.out.println("LoginCommand.execute()");
-        System.out.println(connectionMap);
-        System.out.println(history);
+        ConnectionThread clientConnectionThread = connectionMap.get(clientName);
+        if (clientConnectionThread == null) {
+            return;
+        }
+        connectionMap.remove(clientName);
+        clientConnectionThread.setClientName(this.name);
+        connectionMap.put(this.name, clientConnectionThread);
     }
 }

@@ -38,6 +38,8 @@ public class Server {
     void commandExecute(String clientName, ICommand command)
     {
         command.execute(clientName, connectionMap, history);
+        String logMsg = "clientName=" + clientName + "; connectionMap=" + connectionMap;
+        logger.log(logMsg);
     }
 
     public void run() throws IOException
@@ -69,19 +71,5 @@ public class Server {
 
             logger.log(connectionMap.toString());
         }
-            // String inputLine, outputLine;
-             
-            // Initiate conversation with client
-            // KnockKnockProtocol kkp = new KnockKnockProtocol();
-            // outputLine = kkp.processInput(null);
-            // out.println(outputLine);
- 
-            // while ((inputLine = in.readLine()) != null) {
-            //     outputLine = kkp.processInput(inputLine);
-            //     out.println(outputLine);
-            //     if (outputLine.equals("Bye."))
-            //         break;
-            // }
-
     }
 }

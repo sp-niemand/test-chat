@@ -20,6 +20,9 @@ public class Protocol {
             case QuitCommand.NAME:
                 return new QuitCommand();
 
+            case UserListCommand.NAME:
+                return new UserListCommand();
+
             case TellCommand.NAME:
                 if (parts.length <= 2) {
                     return null;

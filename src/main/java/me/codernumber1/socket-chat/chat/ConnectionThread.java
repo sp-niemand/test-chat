@@ -1,9 +1,15 @@
 package chat;
 
-import java.net.*;
-import java.io.*;
-import chat.command.*;
-import chat.exception.*;
+import java.net.Socket;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import chat.command.Protocol;
+import chat.command.ICommand;
+import chat.command.QuitCommand;
+import chat.command.GetHistoryCommand;
 
 public class ConnectionThread extends Thread {
     private Socket socket;
@@ -47,6 +53,7 @@ public class ConnectionThread extends Thread {
         try {
             logger.log("Connection thread created");
             print("Welcome, <" + clientName + ">!");
+            server.commandExecute(clientName, new GetHistoryCommand());
             commandLoop();
         } catch (Exception e) {
             logger.log("ConnectionThread.run(): " + e);
@@ -56,6 +63,7 @@ public class ConnectionThread extends Thread {
                 in.close();
                 socket.close();
             } catch (Exception e) {
+                logger.log("ConnectionThread.run(): streams disposing failed");
             }
         }
     }

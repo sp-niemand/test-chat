@@ -2,7 +2,7 @@ package chat.command;
 
 import chat.ConnectionThread;
 import chat.History;
-import java.util.*;
+import java.util.Map;
 
 public class QuitCommand implements ICommand {
     public static final int ARGS_NUM = 0;

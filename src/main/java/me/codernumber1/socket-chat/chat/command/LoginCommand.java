@@ -2,7 +2,7 @@ package chat.command;
 
 import chat.ConnectionThread;
 import chat.History;
-import java.util.*;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 public class LoginCommand implements ICommand {

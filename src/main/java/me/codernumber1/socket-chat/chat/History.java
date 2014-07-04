@@ -70,7 +70,7 @@ public class History {
 
     public String[] getLastMessages(int count) throws HistoryException
     {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> lineList = new ArrayList<String>();
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(
@@ -81,13 +81,24 @@ public class History {
             );
 
             while (rs.next()) {
-                result.add(MessageFormatter.getMessageText(rs.getString("name"), rs.getString("message")));
+                lineList.add(MessageFormatter.getMessageText(rs.getString("name"), rs.getString("message")));
             }
         } catch (SQLException e) {
             Logger.instance().log(e);
             throw new HistoryException("History storage fetch failed", e);
         }
-        return (String[]) result.toArray();
+
+        int lineListSize = lineList.size();
+        if (lineListSize != 0) {
+            String[] result = new String[lineListSize];
+            int i = lineListSize - 1;
+            for (String line : lineList) {
+                result[i --] = line;
+            }
+            return result;
+        } else {
+            return new String[0];
+        }
     }
 
     public void addMessage(

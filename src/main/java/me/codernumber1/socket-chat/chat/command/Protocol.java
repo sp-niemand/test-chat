@@ -1,7 +1,8 @@
 package chat.command;
 
-import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class Protocol {
     private static final char COMMAND_DIVIDER = ' ';
@@ -16,6 +17,19 @@ public class Protocol {
                 return parts.length < LoginCommand.ARGS_NUM + 1
                     ? null 
                     : new LoginCommand(parts[1]);
+
+            case GetHistoryCommand.NAME:
+                if (parts.length < GetHistoryCommand.ARGS_NUM + 1) {
+                    return new GetHistoryCommand();
+                } else {
+                    int count;
+                    try {
+                        count = new Integer(parts[1]);    
+                    } catch (NumberFormatException e) {
+                        return new GetHistoryCommand();
+                    }
+                    return new GetHistoryCommand(count);
+                }
 
             case QuitCommand.NAME:
                 return new QuitCommand();

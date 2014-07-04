@@ -1,6 +1,6 @@
 package chat.command;
 
-import java.util.*;
+import java.util.Map;
 import chat.ConnectionThread;
 import chat.History;
 import chat.MessageFormatter;

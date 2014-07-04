@@ -12,14 +12,13 @@ class TestAssignment {
         }
 
         int port = Integer.parseInt(args[0]);
-        Logger logger = new Logger();
-        Server server = new Server(port, logger);
 
         try {
+            Server server = new Server(port);
             server.run();
         } catch (Exception e) {
-            System.out.println("Exception in main thread");
-            System.out.println(e.getMessage());
+            System.out.println("Exception in main thread: " + e);
+            e.printStackTrace();
         }
     }
 }

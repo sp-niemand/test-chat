@@ -1,33 +1,37 @@
 package chat;
 
-import java.net.*;
-import java.io.*;
-import java.util.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
 
 import chat.command.ICommand;
+import chat.exception.HistoryException;
+import chat.exception.ServerException;
 
 public class Server {
     static final int DEFAULT_PORT = 23;
 
-    private int port;
+    private int port = DEFAULT_PORT;
     private int guestId = 1;
     private Map<String, ConnectionThread> connectionMap
         = Collections.synchronizedMap(new HashMap<String, ConnectionThread>());
     private History history;
-    private Logger logger = new Logger();
+    private Logger logger = Logger.instance();
     private ServerSocket serverSocket;
 
-    public Server() {
-        this.port = Server.DEFAULT_PORT;
-    }
-
-    public Server(int port) {
+    public Server(int port) throws ServerException
+    {
         this.port = port;
-    }
 
-    public Server(int port, Logger logger) {
-        this(port);
-        this.logger = logger;
+        try {
+            this.history = new History();
+            this.history.ensureTable();     
+        } catch (HistoryException e) {
+            throw new ServerException("History initialization failed", e);
+        }
     }
 
     private String getNewGuestName() 
@@ -63,7 +67,7 @@ public class Server {
                 Socket clientSocket = serverSocket.accept();  
                 String clientName = this.getNewGuestName();
                 ConnectionThread newConnection = new ConnectionThread(
-                    clientName, clientSocket, this, logger
+                    clientName, clientSocket, this
                 );
                 connectionMap.put(clientName, newConnection);
                 newConnection.start();

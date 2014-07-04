@@ -3,6 +3,7 @@ package chat.command;
 import java.util.*;
 import chat.ConnectionThread;
 import chat.History;
+import chat.MessageFormatter;
 
 class TellCommand implements ICommand {
     public static final String NAME = "/tell";
@@ -32,7 +33,7 @@ class TellCommand implements ICommand {
             return;
         }
         ConnectionThread targetConnection = connectionMap.get(this.name);
-        targetConnection.print(clientName + " :<private>: " + message);
+        targetConnection.print(MessageFormatter.getPrivateMessageText(clientName, message));
     }
 
     public String getName()

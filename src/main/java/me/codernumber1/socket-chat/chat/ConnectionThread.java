@@ -8,12 +8,12 @@ import chat.exception.*;
 public class ConnectionThread extends Thread {
     private Socket socket;
     private Server server;
-    private Logger logger;
+    private Logger logger = Logger.instance();
     private BufferedReader in;
     private PrintWriter out;
     private String clientName;
 
-    public ConnectionThread(String clientName, Socket socket, Server server, Logger logger) {
+    public ConnectionThread(String clientName, Socket socket, Server server) {
         this.clientName = clientName;
         this.socket = socket;
         this.server = server;

@@ -1,8 +1,13 @@
 package chat.command;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+
 import chat.ConnectionThread;
 import chat.History;
+import chat.MessageFormatter;
+import chat.exception.HistoryException;
+import chat.Logger;
 
 class TellAllCommand implements ICommand {
     public static final String NAME = "/tellAll";
@@ -21,11 +26,17 @@ class TellAllCommand implements ICommand {
     )
     {
         Set<String> mapKeys = connectionMap.keySet();
+        String messageText = MessageFormatter.getMessageText(clientName, message);
         for (String key : mapKeys) {
             ConnectionThread connection = connectionMap.get(key);
             if (connection.getClientName() != clientName) {
-                connection.print(clientName + ": " + message);
+                connection.print(messageText);
             }
+        }
+        try {
+            history.addMessage(clientName, message);    
+        } catch (HistoryException e) {
+            Logger.instance().log(e.toString() + " (" + e.getCause() + ")");
         }
     }
 

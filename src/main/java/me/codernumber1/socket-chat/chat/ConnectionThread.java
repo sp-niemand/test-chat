@@ -1,4 +1,4 @@
-package chat;
+package me.codernumber1.socket_chat.chat;
 
 import java.net.Socket;
 import java.io.PrintWriter;
@@ -6,10 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import chat.command.Protocol;
-import chat.command.ICommand;
-import chat.command.QuitCommand;
-import chat.command.GetHistoryCommand;
+import me.codernumber1.socket_chat.chat.command.Protocol;
+import me.codernumber1.socket_chat.chat.command.ICommand;
+import me.codernumber1.socket_chat.chat.command.QuitCommand;
+import me.codernumber1.socket_chat.chat.command.GetHistoryCommand;
 
 public class ConnectionThread extends Thread {
     private Socket socket;

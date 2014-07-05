@@ -1,13 +1,13 @@
-package chat.command;
+package me.codernumber1.socket_chat.chat.command;
 
 import java.util.Map;
 import java.util.Set;
 
-import chat.ConnectionThread;
-import chat.History;
-import chat.MessageFormatter;
-import chat.exception.HistoryException;
-import chat.Logger;
+import me.codernumber1.socket_chat.chat.ConnectionThread;
+import me.codernumber1.socket_chat.chat.History;
+import me.codernumber1.socket_chat.chat.MessageFormatter;
+import me.codernumber1.socket_chat.chat.exception.HistoryException;
+import me.codernumber1.socket_chat.chat.Logger;
 
 class TellAllCommand implements ICommand {
     public static final String NAME = "/tellAll";

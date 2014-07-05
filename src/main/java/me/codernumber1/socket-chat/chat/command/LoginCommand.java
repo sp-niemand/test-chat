@@ -1,7 +1,7 @@
-package chat.command;
+package me.codernumber1.socket_chat.chat.command;
 
-import chat.ConnectionThread;
-import chat.History;
+import me.codernumber1.socket_chat.chat.ConnectionThread;
+import me.codernumber1.socket_chat.chat.History;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 

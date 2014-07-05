@@ -1,4 +1,4 @@
-package chat;
+package me.codernumber1.socket_chat.chat;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
 
-import chat.command.ICommand;
-import chat.exception.HistoryException;
-import chat.exception.ServerException;
+import me.codernumber1.socket_chat.chat.command.ICommand;
+import me.codernumber1.socket_chat.chat.exception.HistoryException;
+import me.codernumber1.socket_chat.chat.exception.ServerException;
 
 public class Server {
     static final int DEFAULT_PORT = 23;

@@ -1,9 +1,9 @@
-package chat.command;
+package me.codernumber1.socket_chat.chat.command;
 
 import java.util.Map;
-import chat.ConnectionThread;
-import chat.History;
-import chat.MessageFormatter;
+import me.codernumber1.socket_chat.chat.ConnectionThread;
+import me.codernumber1.socket_chat.chat.History;
+import me.codernumber1.socket_chat.chat.MessageFormatter;
 
 class TellCommand implements ICommand {
     public static final String NAME = "/tell";
@@ -29,7 +29,7 @@ class TellCommand implements ICommand {
         }
         if (! connectionMap.containsKey(this.name)) {
             ConnectionThread sourceConnection = connectionMap.get(clientName);
-            sourceConnection.print("No such user in chat!");
+            sourceConnection.print("No such user in me.codernumber1.socket_chat.chat!");
             return;
         }
         ConnectionThread targetConnection = connectionMap.get(this.name);

@@ -1,5 +1,7 @@
-import chat.Server;
-import chat.Logger;
+package me.codernumber1.socket_chat;
+
+import me.codernumber1.socket_chat.chat.Server;
+import me.codernumber1.socket_chat.chat.Logger;
 
 class TestAssignment {
     static final int CODE_WRONG_ARGUMENTS = 1;

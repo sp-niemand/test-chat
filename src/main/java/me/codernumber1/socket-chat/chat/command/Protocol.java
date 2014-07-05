@@ -1,4 +1,4 @@
-package chat.command;
+package me.codernumber1.socket_chat.chat.command;
 
 import java.util.Arrays;
 

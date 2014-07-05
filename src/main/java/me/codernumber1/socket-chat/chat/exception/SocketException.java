@@ -1,4 +1,4 @@
-package chat.exception;
+package me.codernumber1.socket_chat.chat.exception;
 
 import java.net.*;
 

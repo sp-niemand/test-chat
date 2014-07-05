@@ -1,4 +1,4 @@
-package chat;
+package me.codernumber1.socket_chat.chat;
 
 public class Logger {
 

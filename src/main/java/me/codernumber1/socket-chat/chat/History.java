@@ -1,4 +1,4 @@
-package chat;
+package me.codernumber1.socket_chat.chat;
 
 import java.util.ArrayList;
 
@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 
-import chat.Logger;
-import chat.exception.HistoryException;
+import me.codernumber1.socket_chat.chat.Logger;
+import me.codernumber1.socket_chat.chat.exception.HistoryException;
 
 public class History {
     public static final int HISTORY_MESSAGES_COUNT = 30;

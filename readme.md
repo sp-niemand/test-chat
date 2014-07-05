@@ -18,7 +18,8 @@
 
 ### Запуск
 
-`mvn exec:java` запустит сервер на порту 60000
+`mvn exec:java` запустит сервер на порту 60000.
+
 Порт можно изменить в `pom.xml`, найдя там plugin с artifactId = exec-maven-plugin.
 
 ### Подключение (Linux)

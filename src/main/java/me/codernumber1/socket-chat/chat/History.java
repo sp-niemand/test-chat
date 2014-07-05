@@ -1,3 +1,8 @@
+/**
+ * History class
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 package me.codernumber1.socket_chat.chat;
 
 import java.util.ArrayList;
@@ -12,6 +17,11 @@ import java.sql.PreparedStatement;
 import me.codernumber1.socket_chat.chat.Logger;
 import me.codernumber1.socket_chat.chat.exception.HistoryException;
 
+/**
+ * This class encapsulates operations with the chat history
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 public class History {
     public static final int HISTORY_MESSAGES_COUNT = 30;
     public static final String TABLE_NAME = "message";
@@ -19,8 +29,12 @@ public class History {
 
     private Connection connection;
 
-    public History() throws HistoryException
-    {
+    /**
+     * Constructor 
+     * 
+     * @throws HistoryException If startup DB operations fail
+     */
+    public History() throws HistoryException {
         try {
             Class.forName("org.sqlite.JDBC");    
         } catch (ClassNotFoundException e) {
@@ -36,8 +50,12 @@ public class History {
         this.connection = connection;
     }
 
-    public void ensureTable() throws HistoryException
-    {
+    /**
+     * Ensures existence of the DB table for history operations
+     * 
+     * @throws HistoryException If the table existence check or its creation fails
+     */
+    public void ensureTable() throws HistoryException {
         try { 
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(
@@ -63,13 +81,23 @@ public class History {
         }
     }
 
-    public String[] getLastMessages() throws HistoryException
-    {
+    /**
+     * Returns last messages from the chat history
+     *
+     * @return An array of messages, prepared to be output to the user
+     */
+    public String[] getLastMessages() throws HistoryException {
         return getLastMessages(HISTORY_MESSAGES_COUNT);
     }
 
-    public String[] getLastMessages(int count) throws HistoryException
-    {
+    /**
+     * Returns last messages from the chat history
+     *
+     * @param count Maximum number of messages to be returned
+     * 
+     * @return An array of messages, prepared to be output to the user
+     */
+    public String[] getLastMessages(int count) throws HistoryException {
         ArrayList<String> lineList = new ArrayList<String>();
         try {
             Statement statement = connection.createStatement();
@@ -101,11 +129,18 @@ public class History {
         }
     }
 
+    /**
+     * Saves the message
+     * 
+     * @param clientName User's name 
+     * @param message Message text
+     * 
+     * @throws HistoryException If saving fails
+     */
     public void addMessage(
         String clientName, 
         String message
-    ) throws HistoryException
-    {
+    ) throws HistoryException {
         try {
             PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO " + TABLE_NAME + " " 

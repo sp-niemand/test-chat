@@ -6,8 +6,7 @@ import me.codernumber1.socket_chat.chat.Logger;
 class TestAssignment {
     static final int CODE_WRONG_ARGUMENTS = 1;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         if (args.length < 1) {
             System.out.println("Wrong arguments number given.");
             System.exit(TestAssignment.CODE_WRONG_ARGUMENTS);

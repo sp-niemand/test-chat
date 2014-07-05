@@ -1,3 +1,8 @@
+/**
+ * TellCommand class
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 package me.codernumber1.socket_chat.chat.command;
 
 import java.util.Map;
@@ -5,24 +10,36 @@ import me.codernumber1.socket_chat.chat.ConnectionThread;
 import me.codernumber1.socket_chat.chat.History;
 import me.codernumber1.socket_chat.chat.MessageFormatter;
 
+/**
+ * This command outputs text message to a single user in the chat
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 class TellCommand implements ICommand {
     public static final String NAME = "/tell";
 
     private String name;
     private String message;
 
-    public TellCommand(String name, String message)
-    {
+    /**
+     * Constructor
+     * 
+     * @param name Message recipient's name
+     * @param message Message to show
+     */
+    public TellCommand(String name, String message) {
         this.name = name;
         this.message = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void execute(
         String clientName,
         Map<String, ConnectionThread> connectionMap,
         History history
-    )
-    {
+    ) {
         if (this.name == clientName) {
 
             return;
@@ -36,13 +53,19 @@ class TellCommand implements ICommand {
         targetConnection.print(MessageFormatter.getPrivateMessageText(clientName, message));
     }
 
-    public String getName()
-    {
+    /**
+     * {@inheritDoc}
+     */
+    public String getName() {
         return NAME;
     }
 
-    public String toString()
-    {
+    /**
+     * Returns string representation of the command. Used to log commands
+     * 
+     * @return
+     */
+    public String toString() {
         return "TellCommand " + "\"" + name + "\" \"" + message + "\"";
     }
 }

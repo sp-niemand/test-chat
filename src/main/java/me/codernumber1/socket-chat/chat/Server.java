@@ -1,3 +1,8 @@
+/**
+ * Server class
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 package me.codernumber1.socket_chat.chat;
 
 import java.net.ServerSocket;
@@ -11,6 +16,11 @@ import me.codernumber1.socket_chat.chat.command.ICommand;
 import me.codernumber1.socket_chat.chat.exception.HistoryException;
 import me.codernumber1.socket_chat.chat.exception.ServerException;
 
+/**
+ * The main class of the chat server
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 public class Server {
     static final int DEFAULT_PORT = 23;
 
@@ -22,8 +32,14 @@ public class Server {
     private Logger logger = Logger.instance();
     private ServerSocket serverSocket;
 
-    public Server(int port) throws ServerException
-    {
+    /**
+     * Constructor 
+     * 
+     * @param port The port on which the server listens for connections
+     * 
+     * @throws ServerException If server initialization fails
+     */
+    public Server(int port) throws ServerException {
         this.port = port;
 
         try {
@@ -34,13 +50,22 @@ public class Server {
         }
     }
 
-    private String getNewGuestName() 
-    {
+    /**
+     * Returns new name for a new user in the chat
+     * 
+     * @return New name
+     */
+    private String getNewGuestName() {
         return "guest" + this.guestId ++;
     }
 
-    void commandExecute(String clientName, ICommand command)
-    {
+    /**
+     * Executes the command in the context of the server
+     * 
+     * @param clientName Name of the command publisher
+     * @param command Command instance
+     */
+    void commandExecute(String clientName, ICommand command) {
         command.execute(clientName, connectionMap, history);
         String logMsg = "Server.commandExecute() environment:\n"
             + "    clientName   = " + clientName + ";\n" 
@@ -49,8 +74,10 @@ public class Server {
         logger.log(logMsg);
     }
 
-    public void run() throws IOException
-    {
+    /**
+     * Runs the server. The main method.
+     */
+    public void run() {
         try {
             serverSocket = new ServerSocket(this.port);
         } catch (IOException e) {

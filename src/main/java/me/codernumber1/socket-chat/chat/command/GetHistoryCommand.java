@@ -1,3 +1,8 @@
+/**
+ * GetHistoryCommand class
+ *
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 package me.codernumber1.socket_chat.chat.command;
 
 import java.util.Map;
@@ -7,6 +12,11 @@ import me.codernumber1.socket_chat.chat.History;
 import me.codernumber1.socket_chat.chat.exception.HistoryException;
 import me.codernumber1.socket_chat.chat.Logger;
 
+/**
+ * Used to show chat history to the user
+ * 
+ * @author Dmitri Cherepovski <codernumber1@gmail.com>
+ */
 public class GetHistoryCommand implements ICommand {
     public static final String NAME = "/getHistory";
     public static final int ARGS_NUM = 1;
@@ -14,21 +24,29 @@ public class GetHistoryCommand implements ICommand {
 
     private int count = DEFAULT_COUNT;
 
-    public GetHistoryCommand()
-    {
+    /**
+     * Default constructor
+     */
+    public GetHistoryCommand() {
     }
 
-    public GetHistoryCommand(int count)
-    {
+    /**
+     * Parameterized constructor
+     * 
+     * @param count Number of historical messages needed
+     */
+    public GetHistoryCommand(int count) {
         this.count = count;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void execute(
         String clientName,
         Map<String, ConnectionThread> connectionMap,
         History history
-    )
-    {
+    ) {
         ConnectionThread clientConnectionThread = connectionMap.get(clientName);
         if (clientConnectionThread == null) {
             return;
@@ -47,8 +65,19 @@ public class GetHistoryCommand implements ICommand {
         }
     }
 
-    public String getName()
-    {
+    /**
+     * {@inheritDoc} 
+     */
+    public String getName() {
         return NAME;
+    }
+
+    /**
+     * Returns string representation of the command. Used to log commands
+     * 
+     * @return
+     */
+    public String toString() {
+        return "GetHistoryCommand \"" + count + "\"";
     }
 }

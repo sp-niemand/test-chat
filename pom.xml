@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>me.codernumber1.socket-chat</groupId>
-  <artifactId>socket-chat</artifactId>
+  <groupId>me.codernumber1.socket_chat</groupId>
+  <artifactId>socket_chat</artifactId>
   <packaging>jar</packaging>
-  <version>0.2</version>
-  <name>socket-chat</name>
-  <url>http://maven.apache.org</url>
+  <version>0.3</version>
+  <name>socket_chat</name>
+  <url>https://github.com/sp-niemand/test-chat</url>
 
   <build>
     <plugins>
@@ -42,7 +42,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-          <mainClass>TestAssignment</mainClass>
+          <mainClass>me.codernumber1.socket_chat.TestAssignment</mainClass>
           <arguments>
             <argument>60000</argument>
           </arguments>

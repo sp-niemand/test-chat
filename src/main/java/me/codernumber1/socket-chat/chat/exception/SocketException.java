@@ -5,7 +5,7 @@
  */
 package me.codernumber1.socket_chat.chat.exception;
 
-import java.net.*;
+import java.net.Socket;
 
 /**
  * SocketException class

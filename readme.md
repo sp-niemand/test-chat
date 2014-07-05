@@ -10,6 +10,21 @@
 
 ## Решение
 
+### Build
+
+Используется Maven 2.
+
+`mvn package`
+
+### Запуск
+
+`mvn exec:java` запустит сервер на порту 60000
+Порт можно изменить в `pom.xml`, найдя там plugin с artifactId = exec-maven-plugin.
+
+### Подключение (Linux)
+
+`telnet localhost 60000`
+
 ### Команды:
 
 * `/login [<name>]` - изменить своё имя

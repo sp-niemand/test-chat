@@ -1,38 +1,46 @@
-# Тестовое задание
+# Telnet socket chat
 
-## Задача
+This is a test task for a position of Java-developer somewhere :)
 
-Написать socket сервер для чата. 
+## Task
 
-Клиентом выступает `telnet`. 
+Implement a simple socket-server for an online chat.
 
-Возможности чата: добавление нового пользователя, переписка в общей комнате, хранение последних 30 сообщений, личные сообщения. Для хранения данных использовать любое удобное хралище(файл, MySql, MongoDB, HBase, Hadoop, и т.д.).
+`telnet` program is used as a client.
 
-## Решение
+You can use anything you want for persistence.
+
+### Features:
+* add new user
+* the room
+* save 30 last messages in history
+* private messages
+
+## Solution
 
 ### Build
 
-Используется Maven 2.
+Use Maven 2.
 
 `mvn package`
 
-### Запуск
+### Launch
 
-`mvn exec:java` запустит сервер на порту 60000.
+`mvn exec:java` launches the server on 60000 port.
 
-Порт можно изменить в `pom.xml`, найдя там plugin с artifactId = exec-maven-plugin.
+The port can be changed in `pom.xml` in config for plugin with artifactId = exec-maven-plugin.
 
-### Подключение (Linux)
+### Connect to the server (Linux)
 
 `telnet localhost 60000`
 
-### Команды:
+### Chat commands:
 
-* `/login [<name>]` - изменить своё имя
-* `/tellAll <text>` - отправить в общий чат
-* `/tell <name> <text>` - отправить в приват
-* `/getHistory [<count>]` - получить историю
-* `/userList` - получить список юзеров в чате
-* `/quit` - покинуть чат
+* `/login [<name>]` - change your name
+* `/tellAll <text>` - send to the room
+* `/tell <name> <text>` - send private message
+* `/getHistory [<count>]` - show chat history
+* `/userList` - get list of users in the room
+* `/quit` - leave the room
 
-Если команда не распознана, то текст отправляется в общий чат. Здесь используется команда `/tellAll`.
+If the server doesn't recognize your message as a command, this message gets sent to the room (so `/tellAll` is the default command).
